@@ -25,8 +25,9 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            'invokables' => [],
-            'factories'  => [],
+            'factories' => [
+                AlbumHydratorInterface::class => AlbumHydratorFactory::class,
+            ],
         ];
     }
 }

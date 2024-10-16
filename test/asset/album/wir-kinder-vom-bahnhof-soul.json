@@ -1,0 +1,32 @@
+{
+  "artist": "Jan Delay",
+  "name": "Wir Kinder vom Bahnhof Soul",
+  "genre": "Funk",
+  "releaseDate": "2009-08-14",
+  "recommendedRetailPrice": "EUR 17.99",
+  "tracks": [
+    {
+      "number": 0,
+      "title": "Showgeschäft",
+      "length": 282
+    },
+    {
+      "number": 0,
+      "title": "Oh Jonny",
+      "length": 219
+    },
+    {
+      "number": 0,
+      "title": "Ein Leben Lang",
+      "length": 266
+    },
+    {
+      "number": 0,
+      "title": "Überdosis Fremdscham",
+      "length": 263
+    }
+  ]
+}
+
+
+

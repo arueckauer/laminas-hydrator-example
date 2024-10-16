@@ -1,0 +1,29 @@
+{
+  "artist": "Michael Jackson",
+  "name": "Thriller",
+  "genre": "Pop",
+  "releaseDate": "1982-11-29",
+  "recommendedRetailPrice": "USD 12.00",
+  "tracks": [
+    {
+      "number": 1,
+      "title": "Wanna Be Startin' Somethin'",
+      "length": 363
+    },
+    {
+      "number": 2,
+      "title": "Baby Be Mine",
+      "length": 260
+    },
+    {
+      "number": 3,
+      "title": "The girl is mine",
+      "length": 222
+    },
+    {
+      "number": 4,
+      "title": "Thriller",
+      "length": 358
+    }
+  ]
+}
