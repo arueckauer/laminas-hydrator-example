@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Psr\Container\ContainerInterface;
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+(static function () {
+    $container = require dirname(__DIR__) . '/config/container.php';
+    assert($container instanceof ContainerInterface);
+
+    echo $container::class . PHP_EOL;
+})();
