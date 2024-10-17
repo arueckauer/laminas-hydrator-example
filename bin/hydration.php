@@ -16,14 +16,14 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
     $output = new ConsoleOutput();
 
-    $dataPath = dirname(__DIR__) . '/test/asset/album/';
-    $albums   = array_filter(
+    $dataPath   = dirname(__DIR__) . '/test/asset/album/';
+    $albumFiles = array_filter(
         scandir($dataPath),
         static fn (string $file): bool => pathinfo($file, PATHINFO_EXTENSION) === 'json'
     );
 
-    foreach ($albums as $album) {
-        $inputJson = file_get_contents($dataPath . $album);
+    foreach ($albumFiles as $albumFile) {
+        $inputJson = file_get_contents($dataPath . $albumFile);
 
         /** @var array<string, mixed> $inputArray */
         $inputArray = json_decode(
@@ -40,11 +40,20 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
         $instance        = $reflectionClass->newInstanceWithoutConstructor();
 
         $album = $reflectionHydrator->hydrate($inputArray, $instance);
+        assert($album instanceof Album);
+
+        $output->writeln(sprintf(
+            '<info>%s (%s)</info>',
+            $album->name,
+            $album->artist,
+        ));
+
         $output->writeln('Hydrated album:');
         $output->writeln(print_r($album, true));
 
         $extractedDataAlbum = $reflectionHydrator->extract($album);
         $output->writeln('Extracted album (JSON):');
         $output->writeln(json_encode($extractedDataAlbum, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+        $output->writeln('');
     }
 })();
