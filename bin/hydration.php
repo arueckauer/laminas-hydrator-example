@@ -16,7 +16,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
     $output = new ConsoleOutput();
 
-    $dataPath   = dirname(__DIR__) . '/test/asset/album/';
+    $dataPath   = dirname(__DIR__) . '/test/asset/music/album/';
     $albumFiles = array_filter(
         scandir($dataPath),
         static fn (string $file): bool => pathinfo($file, PATHINFO_EXTENSION) === 'json'
