@@ -19,15 +19,15 @@ class AlbumHydratorFactory
         $reflectionHydrator = new ReflectionHydrator();
         $reflectionHydrator->addStrategy(
             'genre',
-            new BackedEnumStrategy(Genre::class)
+            new BackedEnumStrategy(Genre::class),
         );
         $reflectionHydrator->addStrategy(
             'releaseDate',
-            new DateTimeImmutableFormatterStrategy(new DateTimeFormatterStrategy('Y-m-d'))
+            new DateTimeImmutableFormatterStrategy(new DateTimeFormatterStrategy('Y-m-d')),
         );
         $reflectionHydrator->addStrategy(
             'recommendedRetailPrice',
-            new MoneyStrategy()
+            new MoneyStrategy(),
         );
         $reflectionHydrator->addStrategy(
             'tracks',
