@@ -10,15 +10,15 @@
     ],
     "require": {
         "php": "~8.2.0",
-        "laminas/laminas-config-aggregator": "^1.15",
-        "laminas/laminas-hydrator": "^4.15",
-        "laminas/laminas-servicemanager": "^3.22"
+        "laminas/laminas-config-aggregator": "^1.18",
+        "laminas/laminas-hydrator": "^4.16",
+        "laminas/laminas-servicemanager": "^3.23"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "~2.44.0",
+        "ergebnis/composer-normalize": "~2.45",
         "laminas/laminas-coding-standard": "~3.0.1",
-        "phpunit/phpunit": "~10.5.36",
-        "rector/rector": "~1.2.7",
+        "phpunit/phpunit": "~10.5.45",
+        "rector/rector": "~2.0.9",
         "vimeo/psalm": "~5.26.1"
     },
     "autoload": {
