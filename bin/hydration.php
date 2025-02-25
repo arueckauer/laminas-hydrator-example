@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Laminas\Hydrator\ReflectionHydrator;
-use LaminasHydratorExample\Album;
-use LaminasHydratorExample\AlbumHydratorInterface;
+use LaminasHydratorExample\Music\Album;
+use LaminasHydratorExample\Music\AlbumHydratorInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 

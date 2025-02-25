@@ -5,7 +5,7 @@
       <code><![CDATA[assert($album instanceof Album)]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="src/Album.php">
+  <file src="src/Music/Album.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -16,12 +16,12 @@
       <code><![CDATA[$tracks]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="src/AlbumHydratorFactory.php">
+  <file src="src/Music/AlbumHydratorFactory.php">
     <PossiblyUnusedParam>
       <code><![CDATA[$container]]></code>
     </PossiblyUnusedParam>
   </file>
-  <file src="src/Track.php">
+  <file src="src/Music/Track.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>

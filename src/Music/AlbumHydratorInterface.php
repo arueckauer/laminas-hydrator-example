@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Music;
 
 interface AlbumHydratorInterface
 {

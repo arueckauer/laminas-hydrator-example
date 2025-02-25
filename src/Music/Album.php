@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Music;
 
 use DateTimeImmutable;
+use LaminasHydratorExample\Money;
 
 readonly class Album
 {

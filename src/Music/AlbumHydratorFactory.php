@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Music;
 
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
+use LaminasHydratorExample\MoneyStrategy;
 use Psr\Container\ContainerInterface;
 
 class AlbumHydratorFactory

@@ -6,6 +6,7 @@ namespace LaminasHydratorExample;
 
 use InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use LaminasHydratorExample\Money;
 
 use function count;
 use function number_format;
