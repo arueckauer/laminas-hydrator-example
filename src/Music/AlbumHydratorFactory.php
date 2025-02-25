@@ -17,18 +17,22 @@ class AlbumHydratorFactory
     public function __invoke(ContainerInterface $container): ReflectionHydrator
     {
         $reflectionHydrator = new ReflectionHydrator();
+
         $reflectionHydrator->addStrategy(
             'genre',
             new BackedEnumStrategy(Genre::class),
         );
+
         $reflectionHydrator->addStrategy(
             'releaseDate',
             new DateTimeImmutableFormatterStrategy(new DateTimeFormatterStrategy('Y-m-d')),
         );
+
         $reflectionHydrator->addStrategy(
             'recommendedRetailPrice',
             new MoneyStrategy(),
         );
+
         $reflectionHydrator->addStrategy(
             'tracks',
             new CollectionStrategy(new ReflectionHydrator(), Track::class),
