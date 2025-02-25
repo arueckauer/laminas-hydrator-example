@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasHydratorExample;
 
-use LaminasHydratorExample\Music\AlbumHydratorFactory;
-use LaminasHydratorExample\Music\AlbumHydratorInterface;
-
 /**
  * @psalm-type _Dependencies = array<string, array<string, string|array>>
  */
@@ -29,7 +26,8 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                AlbumHydratorInterface::class => AlbumHydratorFactory::class,
+                Literature\BookHydratorInterface::class => Literature\BookHydratorFactory::class,
+                Music\AlbumHydratorInterface::class     => Music\AlbumHydratorFactory::class,
             ],
         ];
     }

@@ -5,6 +5,16 @@
       <code><![CDATA[assert($album instanceof Album)]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
+  <file src="src/Literature/BookHydratorFactory.php">
+    <PossiblyUnusedParam>
+      <code><![CDATA[$container]]></code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Literature/Genre.php">
+    <UnusedClass>
+      <code><![CDATA[Genre]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Music/Album.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -30,5 +40,10 @@
       <code><![CDATA[$number]]></code>
       <code><![CDATA[$title]]></code>
     </PossiblyUnusedProperty>
+  </file>
+  <file src="test/unit/Literature/BookTest.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[bookProvider]]></code>
+    </PossiblyUnusedMethod>
   </file>
 </files>
