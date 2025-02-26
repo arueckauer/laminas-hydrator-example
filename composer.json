@@ -2,6 +2,7 @@
     "name": "rueckauer/laminas-hydrator-example",
     "description": "Example project for the Laminas Hydrator",
     "license": "BSD-3-Clause",
+    "type": "project",
     "authors": [
         {
             "name": "Andi Rückauer",
