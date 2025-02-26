@@ -13,10 +13,7 @@ use LaminasHydratorExample\NullableMoneyStrategy;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
-use ReflectionClass;
 use ReflectionException;
 
 use function dirname;
@@ -31,19 +28,14 @@ class BookHydratorTest extends TestCase
      * @throws Exception
      * @throws JsonException
      * @throws ReflectionException
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
      */
     #[DataProvider('extractProvider')]
     public function test_extract(array $expected, string $file): void
     {
         $bookHydrator = (new BookHydratorFactory())($this->container());
 
-        $reflectionClass = new ReflectionClass(Book::class);
-
         $book = $bookHydrator->hydrate(
             $this->getFileAsPayload($file),
-            $reflectionClass->newInstanceWithoutConstructor(),
         );
 
         $actual = $bookHydrator->extract($book);
@@ -52,20 +44,16 @@ class BookHydratorTest extends TestCase
     }
 
     /**
-     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
-     * @throws NotFoundExceptionInterface
      * @throws ReflectionException
      */
     public function test_extract_incompletePayload(): void
     {
         $bookHydrator = (new BookHydratorFactory())($this->container());
 
-        $reflectionClass = new ReflectionClass(Book::class);
-        $book            = $bookHydrator->hydrate(
+        $book = $bookHydrator->hydrate(
             $this->getFileAsPayload('unvollständiger-payload.json'),
-            $reflectionClass->newInstanceWithoutConstructor()
         );
 
         // phpcs:ignore Generic.Files.LineLength.TooLong
@@ -78,10 +66,8 @@ class BookHydratorTest extends TestCase
     }
 
     /**
-     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
-     * @throws NotFoundExceptionInterface
      * @throws ReflectionException
      */
     #[DataProvider('hydrateProvider')]
@@ -89,10 +75,8 @@ class BookHydratorTest extends TestCase
     {
         $bookHydrator = (new BookHydratorFactory())($this->container());
 
-        $reflectionClass = new ReflectionClass(Book::class);
-        $actual          = $bookHydrator->hydrate(
+        $actual = $bookHydrator->hydrate(
             $this->getFileAsPayload($file),
-            $reflectionClass->newInstanceWithoutConstructor()
         );
 
         self::assertEquals($expected->title, $actual->title);
@@ -104,20 +88,16 @@ class BookHydratorTest extends TestCase
     }
 
     /**
-     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
-     * @throws NotFoundExceptionInterface
      * @throws ReflectionException
      */
     public function test_hydrate_incompletePayload(): void
     {
         $bookHydrator = (new BookHydratorFactory())($this->container());
 
-        $reflectionClass = new ReflectionClass(Book::class);
-        $actual          = $bookHydrator->hydrate(
+        $actual = $bookHydrator->hydrate(
             $this->getFileAsPayload('unvollständiger-payload.json'),
-            $reflectionClass->newInstanceWithoutConstructor()
         );
 
         self::assertEquals('Arno Nym', $actual->author);

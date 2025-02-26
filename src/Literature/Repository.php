@@ -6,13 +6,13 @@ namespace LaminasHydratorExample\Literature;
 
 use GuzzleHttp\Psr7\Request;
 use JsonException;
-use Laminas\Hydrator\ReflectionHydrator;
+use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
 use LaminasHydratorExample\Exception\FetchFailed;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use ReflectionClass;
 use ReflectionException;
 
+use function assert;
 use function json_decode;
 
 use const JSON_THROW_ON_ERROR;
@@ -21,7 +21,7 @@ final readonly class Repository
 {
     public function __construct(
         private ClientInterface $httpClient,
-        private ReflectionHydrator $bookHydrator,
+        private AutoInstantiatingReflectionHydrator $bookHydrator,
     ) {
     }
 
@@ -50,11 +50,9 @@ final readonly class Repository
         /** @psalm-var array<string, mixed> $payload */
         $payload = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
-        $reflectionClass = new ReflectionClass(Book::class);
+        $book = $this->bookHydrator->hydrate($payload);
+        assert($book instanceof Book);
 
-        return $this->bookHydrator->hydrate(
-            $payload,
-            $reflectionClass->newInstanceWithoutConstructor(),
-        );
+        return $book;
     }
 }
