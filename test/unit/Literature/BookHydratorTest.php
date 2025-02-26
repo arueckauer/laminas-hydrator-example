@@ -21,15 +21,15 @@ use function json_decode;
 
 use const JSON_THROW_ON_ERROR;
 
-class BookTest extends TestCase
+class BookHydratorTest extends TestCase
 {
     /**
-     * @throws JsonException
      * @throws Exception
+     * @throws JsonException
      * @throws ReflectionException
      */
     #[DataProvider('bookProvider')]
-    public function test___construct(Book $expected, string $file): void
+    public function test_hydrate(Book $expected, string $file): void
     {
         /** @psalm-var array<string, mixed> $payload */
         $payload = json_decode(
