@@ -17,10 +17,10 @@ readonly class NullableMoneyStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
-    public function extract($value, ?object $object = null): string
+    public function extract($value, ?object $object = null): ?string
     {
         if (! $value instanceof Money) {
-                throw new InvalidArgumentException('Invalid money value');
+            return null;
         }
 
         return sprintf(
