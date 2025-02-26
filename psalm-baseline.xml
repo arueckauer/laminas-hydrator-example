@@ -5,11 +5,6 @@
       <code><![CDATA[assert($album instanceof Album)]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
-  <file src="src/Literature/BookHydratorFactory.php">
-    <PossiblyUnusedParam>
-      <code><![CDATA[$container]]></code>
-    </PossiblyUnusedParam>
-  </file>
   <file src="src/Literature/Genre.php">
     <UnusedClass>
       <code><![CDATA[Genre]]></code>

@@ -25,7 +25,10 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            'factories' => [
+            'invokables' => [
+                NullableMoneyStrategy::class => NullableMoneyStrategy::class,
+            ],
+            'factories'  => [
                 Literature\BookHydratorInterface::class => Literature\BookHydratorFactory::class,
                 Music\AlbumHydratorInterface::class     => Music\AlbumHydratorFactory::class,
             ],

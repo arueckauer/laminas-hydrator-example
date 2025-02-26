@@ -9,6 +9,7 @@ use LaminasHydratorExample\Literature\Book;
 use LaminasHydratorExample\Literature\BookHydratorFactory;
 use LaminasHydratorExample\Literature\Repository;
 use LaminasHydratorExample\Money;
+use LaminasHydratorExample\NullableMoneyStrategy;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -60,9 +61,14 @@ class RepositoryTest extends TestCase
             ->method('sendRequest')
             ->willReturn($response);
 
-        $bookHydrator = (new BookHydratorFactory())(
-            $this->createStub(ContainerInterface::class)
-        );
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->expects(self::once())
+            ->method('get')
+            ->with(NullableMoneyStrategy::class)
+            ->willReturn(new NullableMoneyStrategy());
+
+        $bookHydrator = (new BookHydratorFactory())($container);
 
         $repository = new Repository(
             $httpClient,

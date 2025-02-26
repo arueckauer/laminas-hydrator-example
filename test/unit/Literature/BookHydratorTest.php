@@ -9,10 +9,13 @@ use JsonException;
 use LaminasHydratorExample\Literature\Book;
 use LaminasHydratorExample\Literature\BookHydratorFactory;
 use LaminasHydratorExample\Money;
+use LaminasHydratorExample\NullableMoneyStrategy;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use ReflectionClass;
 use ReflectionException;
 
@@ -28,13 +31,13 @@ class BookHydratorTest extends TestCase
      * @throws Exception
      * @throws JsonException
      * @throws ReflectionException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     #[DataProvider('extractProvider')]
     public function test_extract(array $expected, string $file): void
     {
-        $container = $this->createStub(ContainerInterface::class);
-
-        $bookHydrator = (new BookHydratorFactory())($container);
+        $bookHydrator = (new BookHydratorFactory())($this->container());
 
         $reflectionClass = new ReflectionClass(Book::class);
 
@@ -49,15 +52,15 @@ class BookHydratorTest extends TestCase
     }
 
     /**
-     * @throws ReflectionException
+     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
+     * @throws NotFoundExceptionInterface
+     * @throws ReflectionException
      */
     public function test_extract_incompletePayload(): void
     {
-        $container = $this->createStub(ContainerInterface::class);
-
-        $bookHydrator = (new BookHydratorFactory())($container);
+        $bookHydrator = (new BookHydratorFactory())($this->container());
 
         $reflectionClass = new ReflectionClass(Book::class);
         $book            = $bookHydrator->hydrate(
@@ -75,16 +78,16 @@ class BookHydratorTest extends TestCase
     }
 
     /**
+     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
+     * @throws NotFoundExceptionInterface
      * @throws ReflectionException
      */
     #[DataProvider('hydrateProvider')]
     public function test_hydrate(Book $expected, string $file): void
     {
-        $container = $this->createStub(ContainerInterface::class);
-
-        $bookHydrator = (new BookHydratorFactory())($container);
+        $bookHydrator = (new BookHydratorFactory())($this->container());
 
         $reflectionClass = new ReflectionClass(Book::class);
         $actual          = $bookHydrator->hydrate(
@@ -101,15 +104,15 @@ class BookHydratorTest extends TestCase
     }
 
     /**
-     * @throws ReflectionException
+     * @throws ContainerExceptionInterface
      * @throws Exception
      * @throws JsonException
+     * @throws NotFoundExceptionInterface
+     * @throws ReflectionException
      */
     public function test_hydrate_incompletePayload(): void
     {
-        $container = $this->createStub(ContainerInterface::class);
-
-        $bookHydrator = (new BookHydratorFactory())($container);
+        $bookHydrator = (new BookHydratorFactory())($this->container());
 
         $reflectionClass = new ReflectionClass(Book::class);
         $actual          = $bookHydrator->hydrate(
@@ -192,5 +195,20 @@ class BookHydratorTest extends TestCase
         );
 
         return $payload;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function container(): ContainerInterface
+    {
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->expects(self::once())
+            ->method('get')
+            ->with(NullableMoneyStrategy::class)
+            ->willReturn(new NullableMoneyStrategy());
+
+        return $container;
     }
 }
