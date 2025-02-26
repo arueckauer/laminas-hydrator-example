@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasHydratorExampleTest\Literature;
 
+use Error;
 use JsonException;
 use LaminasHydratorExample\Literature\Book;
 use LaminasHydratorExample\Literature\BookHydratorFactory;
@@ -28,23 +29,68 @@ class BookHydratorTest extends TestCase
      * @throws JsonException
      * @throws ReflectionException
      */
-    #[DataProvider('bookProvider')]
-    public function test_hydrate(Book $expected, string $file): void
+    #[DataProvider('extractProvider')]
+    public function test_extract(array $expected, string $file): void
     {
-        /** @psalm-var array<string, mixed> $payload */
-        $payload = json_decode(
-            file_get_contents(dirname(__DIR__, 2) . '/asset/literature/book/' . $file),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
-
         $container = $this->createStub(ContainerInterface::class);
 
         $bookHydrator = (new BookHydratorFactory())($container);
 
         $reflectionClass = new ReflectionClass(Book::class);
-        $actual          = $bookHydrator->hydrate($payload, $reflectionClass->newInstanceWithoutConstructor());
+
+        $book = $bookHydrator->hydrate(
+            $this->getFileAsPayload($file),
+            $reflectionClass->newInstanceWithoutConstructor(),
+        );
+
+        $actual = $bookHydrator->extract($book);
+
+        self::assertEquals($expected, $actual);
+    }
+
+    /**
+     * @throws ReflectionException
+     * @throws Exception
+     * @throws JsonException
+     */
+    public function test_extract_incompletePayload(): void
+    {
+        $container = $this->createStub(ContainerInterface::class);
+
+        $bookHydrator = (new BookHydratorFactory())($container);
+
+        $reflectionClass = new ReflectionClass(Book::class);
+        $book            = $bookHydrator->hydrate(
+            $this->getFileAsPayload('unvollständiger-payload.json'),
+            $reflectionClass->newInstanceWithoutConstructor()
+        );
+
+        // phpcs:ignore Generic.Files.LineLength.TooLong
+        $message = 'Typed property LaminasHydratorExample\Literature\Book::$title must not be accessed before initialization';
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage($message);
+
+        $bookHydrator->extract($book);
+    }
+
+    /**
+     * @throws Exception
+     * @throws JsonException
+     * @throws ReflectionException
+     */
+    #[DataProvider('hydrateProvider')]
+    public function test_hydrate(Book $expected, string $file): void
+    {
+        $container = $this->createStub(ContainerInterface::class);
+
+        $bookHydrator = (new BookHydratorFactory())($container);
+
+        $reflectionClass = new ReflectionClass(Book::class);
+        $actual          = $bookHydrator->hydrate(
+            $this->getFileAsPayload($file),
+            $reflectionClass->newInstanceWithoutConstructor()
+        );
 
         self::assertEquals($expected->title, $actual->title);
         self::assertEquals($expected->author, $actual->author);
@@ -54,7 +100,56 @@ class BookHydratorTest extends TestCase
         self::assertEquals($expected->genre, $actual->genre);
     }
 
-    public static function bookProvider(): array
+    /**
+     * @throws ReflectionException
+     * @throws Exception
+     * @throws JsonException
+     */
+    public function test_hydrate_incompletePayload(): void
+    {
+        $container = $this->createStub(ContainerInterface::class);
+
+        $bookHydrator = (new BookHydratorFactory())($container);
+
+        $reflectionClass = new ReflectionClass(Book::class);
+        $actual          = $bookHydrator->hydrate(
+            $this->getFileAsPayload('unvollständiger-payload.json'),
+            $reflectionClass->newInstanceWithoutConstructor()
+        );
+
+        self::assertEquals('Arno Nym', $actual->author);
+        self::assertEquals(['author' => 'Arno Nym'], (array) $actual);
+    }
+
+    public static function extractProvider(): array
+    {
+        return [
+            'die_unendliche_geschichte' => [
+                [
+                    'title'       => 'Die unendliche Geschichte',
+                    'author'      => 'Michael Ende',
+                    'publishedAt' => '1979-09-01',
+                    'price'       => 'DEM 12.99',
+                    'isbn'        => '3-522-12800-1',
+                    'genre'       => 'Fantasy',
+                ],
+                'die-unendliche-geschichte.json',
+            ],
+            'unbekanntes_buch'          => [
+                [
+                    'title'       => null,
+                    'author'      => 'Ghost Writer',
+                    'publishedAt' => null,
+                    'price'       => null,
+                    'isbn'        => null,
+                    'genre'       => null,
+                ],
+                'unbekanntes-buch.json',
+            ],
+        ];
+    }
+
+    public static function hydrateProvider(): array
     {
         return [
             'die_unendliche_geschichte' => [
@@ -80,5 +175,22 @@ class BookHydratorTest extends TestCase
                 'unbekanntes-buch.json',
             ],
         ];
+    }
+
+    /**
+     * @psalm-return array<string, mixed>
+     * @throws JsonException
+     */
+    private function getFileAsPayload(string $file): array
+    {
+        /** @psalm-var array<string, mixed> $payload */
+        $payload = json_decode(
+            file_get_contents(dirname(__DIR__, 2) . '/asset/literature/book/' . $file),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        return $payload;
     }
 }

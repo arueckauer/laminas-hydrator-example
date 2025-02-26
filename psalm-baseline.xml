@@ -41,9 +41,10 @@
       <code><![CDATA[$title]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="test/unit/Literature/BookTest.php">
+  <file src="test/unit/Literature/BookHydratorTest.php">
     <PossiblyUnusedMethod>
-      <code><![CDATA[bookProvider]]></code>
+      <code><![CDATA[extractProvider]]></code>
+      <code><![CDATA[hydrateProvider]]></code>
     </PossiblyUnusedMethod>
   </file>
 </files>
