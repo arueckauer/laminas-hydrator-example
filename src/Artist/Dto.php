@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Artist;
 
-final readonly class Artist
+final readonly class Dto
 {
     public function __construct(
         public string $name,

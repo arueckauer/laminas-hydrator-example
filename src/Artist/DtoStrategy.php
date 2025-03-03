@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Artist;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
@@ -11,7 +11,7 @@ use ReflectionException;
 
 use function is_array;
 
-final readonly class ArtistStrategy implements StrategyInterface
+final readonly class DtoStrategy implements StrategyInterface
 {
     public function __construct(
         private AutoInstantiatingReflectionHydrator $artistHydrator,
@@ -23,8 +23,8 @@ final readonly class ArtistStrategy implements StrategyInterface
      */
     public function extract($value, ?object $object = null)
     {
-        if (! $value instanceof Artist) {
-            throw new InvalidArgument('First argument of ' . __METHOD__ . ' must be an instance of ' . Artist::class);
+        if (! $value instanceof Dto) {
+            throw new InvalidArgument('First argument of ' . __METHOD__ . ' must be an instance of ' . Dto::class);
         }
 
         return $this->artistHydrator->extract($value);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
-  <file src="src/Album.php">
+  <file src="src/Album/Dto.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$artist]]></code>
       <code><![CDATA[$coverUrl]]></code>
@@ -29,31 +29,31 @@
       <code><![CDATA[public function hydrate($value, ?array $data): Money]]></code>
     </MissingOverrideAttribute>
   </file>
-  <file src="src/Artist.php">
+  <file src="src/Artist/Dto.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$artistName]]></code>
       <code><![CDATA[$name]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="src/ArtistHydratorFactory.php">
+  <file src="src/Artist/DtoHydratorFactory.php">
     <UnusedParam>
       <code><![CDATA[$container]]></code>
     </UnusedParam>
   </file>
-  <file src="src/ArtistStrategy.php">
+  <file src="src/Artist/DtoStrategy.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
       <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
     </MissingOverrideAttribute>
   </file>
-  <file src="src/Track.php">
+  <file src="src/Track/Dto.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$length]]></code>
       <code><![CDATA[$number]]></code>
       <code><![CDATA[$title]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="src/TrackCollection.php">
+  <file src="src/Track/DtoCollection.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function count(): int]]></code>
       <code><![CDATA[public function getIterator(): Traversable]]></code>
@@ -66,13 +66,13 @@
       <code><![CDATA[count]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/TrackCollectionStrategy.php">
+  <file src="src/Track/DtoCollectionStrategy.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
       <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
     </MissingOverrideAttribute>
   </file>
-  <file src="src/TrackHydratorFactory.php">
+  <file src="src/Track/DtoHydratorFactory.php">
     <UnusedParam>
       <code><![CDATA[$container]]></code>
     </UnusedParam>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Artist;
 
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
 use Psr\Container\ContainerExceptionInterface;
@@ -11,18 +11,18 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function assert;
 
-final class ArtistStrategyFactory
+final class DtoStrategyFactory
 {
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container): ArtistStrategy
+    public function __invoke(ContainerInterface $container): DtoStrategy
     {
-        $artistHydrator = $container->get(ArtistHydratorInterface::class);
+        $artistHydrator = $container->get(DtoHydratorInterface::class);
         assert($artistHydrator instanceof AutoInstantiatingReflectionHydrator);
 
-        return new ArtistStrategy(
+        return new DtoStrategy(
             $artistHydrator,
         );
     }

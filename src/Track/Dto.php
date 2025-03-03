@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Track;
 
-final readonly class Track
+final readonly class Dto
 {
     public function __construct(
         public int $number,

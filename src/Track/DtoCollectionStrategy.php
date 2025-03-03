@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Track;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
@@ -14,7 +14,7 @@ use function assert;
 use function is_array;
 use function iterator_to_array;
 
-final readonly class TrackCollectionStrategy implements StrategyInterface
+final readonly class DtoCollectionStrategy implements StrategyInterface
 {
     public function __construct(
         private AutoInstantiatingReflectionHydrator $trackHydrator,
@@ -32,7 +32,7 @@ final readonly class TrackCollectionStrategy implements StrategyInterface
         }
 
         return array_map(
-            fn (Track $track) => $this->trackHydrator->extract($track),
+            fn (Dto $track) => $this->trackHydrator->extract($track),
             iterator_to_array($value)
         );
     }
@@ -50,15 +50,15 @@ final readonly class TrackCollectionStrategy implements StrategyInterface
 
         $tracks = array_map(
             /** @psalm-param array<string, mixed> $data */
-            function (array $data): Track {
+            function (array $data): Dto {
                 $track = $this->trackHydrator->hydrate($data);
-                assert($track instanceof Track);
+                assert($track instanceof Dto);
 
                 return $track;
             },
             $value
         );
 
-        return new TrackCollection(...$tracks);
+        return new DtoCollection(...$tracks);
     }
 }

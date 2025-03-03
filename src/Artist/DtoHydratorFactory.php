@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Artist;
 
 use Laminas\Hydrator\ReflectionHydrator;
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
 use Psr\Container\ContainerInterface;
 
-final class TrackHydratorFactory
+final class DtoHydratorFactory
 {
     public function __invoke(ContainerInterface $container): AutoInstantiatingReflectionHydrator
     {
         return new AutoInstantiatingReflectionHydrator(
             new ReflectionHydrator(),
-            Track::class,
+            Dto::class,
         );
     }
 }

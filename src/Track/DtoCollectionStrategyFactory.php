@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Track;
 
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
 use Psr\Container\ContainerExceptionInterface;
@@ -11,18 +11,18 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function assert;
 
-final class TrackCollectionStrategyFactory
+final class DtoCollectionStrategyFactory
 {
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container): TrackCollectionStrategy
+    public function __invoke(ContainerInterface $container): DtoCollectionStrategy
     {
-        $trackHydrator = $container->get(TrackHydratorInterface::class);
+        $trackHydrator = $container->get(DtoHydratorInterface::class);
         assert($trackHydrator instanceof AutoInstantiatingReflectionHydrator);
 
-        return new TrackCollectionStrategy(
+        return new DtoCollectionStrategy(
             $trackHydrator,
         );
     }

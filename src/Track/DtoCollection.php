@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Track;
 
 use ArrayAccess;
 use ArrayIterator;
@@ -15,15 +15,15 @@ use function count;
 /**
  * @template TKey of array-key
  * @template TValue
- * @implements ArrayAccess<int, Track>
- * @implements IteratorAggregate<int, Track>
+ * @implements ArrayAccess<int, Dto>
+ * @implements IteratorAggregate<int, Dto>
  */
-final readonly class TrackCollection implements ArrayAccess, Countable, IteratorAggregate
+final readonly class DtoCollection implements ArrayAccess, Countable, IteratorAggregate
 {
-    /** @var Track[] */
+    /** @var Dto[] */
     private array $tracks;
 
-    public function __construct(Track ...$data)
+    public function __construct(Dto ...$data)
     {
         $this->tracks = $data;
     }
