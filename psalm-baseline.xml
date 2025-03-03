@@ -3,6 +3,7 @@
   <file src="src/Album.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$artist]]></code>
+      <code><![CDATA[$coverUrl]]></code>
       <code><![CDATA[$genre]]></code>
       <code><![CDATA[$name]]></code>
       <code><![CDATA[$recommendedRetailPrice]]></code>

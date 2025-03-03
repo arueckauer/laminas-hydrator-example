@@ -15,6 +15,7 @@ final readonly class Album
         public DateTimeImmutable $releaseDate,
         public Money $recommendedRetailPrice,
         public TrackCollection $tracks,
+        public ?string $coverUrl,
     ) {
     }
 }

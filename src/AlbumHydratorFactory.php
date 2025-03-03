@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasHydratorExample;
 
+use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
@@ -44,6 +45,15 @@ final class AlbumHydratorFactory
             'tracks',
             $trackCollectionStrategy,
         );
+
+        $reflectionHydrator->setNamingStrategy(MapNamingStrategy::createFromAsymmetricMap(
+            [
+                'coverUrl' => 'cover',
+            ],
+            [
+                'cover' => 'coverUrl',
+            ],
+        ));
 
         return new AutoInstantiatingReflectionHydrator(
             $reflectionHydrator,

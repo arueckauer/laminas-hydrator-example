@@ -38,7 +38,7 @@ final class AlbumHydratorTest extends TestCase
      * @throws Exception
      * @throws ReflectionException
      */
-    public function test_hydrate(): void
+    public function test_hydrate_thriller(): void
     {
         $expected = new Album(
             'Michael Jackson',
@@ -52,19 +52,38 @@ final class AlbumHydratorTest extends TestCase
                 new Track(3, 'The girl is mine', 222),
                 new Track(4, 'Thriller', 358),
             ),
+            'https://www.epicrecords.com/artists/michael-jackson/albums/thriller/cover',
         );
 
-        $thriller = file_get_contents(dirname(__DIR__) . '/asset/album/thriller.json');
-        assert($thriller !== false);
+        $actual = $this->albumHydrator()->hydrate($this->data('thriller.json'));
 
-        /** @psalm-var array<string, mixed> $data */
-        $data = json_decode(
-            $thriller,
-            true,
-            JSON_THROW_ON_ERROR,
+        self::assertEquals($expected, $actual);
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws Exception
+     * @throws ReflectionException
+     */
+    public function test_hydrate_wirKinderVomBahnhofSoul(): void
+    {
+        $expected = new Album(
+            'Jan Delay',
+            'Wir Kinder vom Bahnhof Soul',
+            Genre::Funk,
+            new DateTimeImmutable('2009-08-14'),
+            new Money('EUR', 17.99),
+            new TrackCollection(
+                new Track(1, 'Showgeschäft', 282),
+                new Track(2, 'Oh Jonny', 219),
+                new Track(3, 'Ein Leben Lang', 266),
+                new Track(4, 'Überdosis Fremdscham', 263),
+            ),
+            null,
         );
 
-        $actual = $this->albumHydrator()->hydrate($data);
+        $actual = $this->albumHydrator()->hydrate($this->data('wir-kinder-vom-bahnhof-soul.json'));
 
         self::assertEquals($expected, $actual);
     }
@@ -97,5 +116,23 @@ final class AlbumHydratorTest extends TestCase
             ->willReturn($trackCollectionStrategy);
 
         return (new AlbumHydratorFactory())($containerB);
+    }
+
+    /**
+     * @psalm-return array<string, mixed>
+     */
+    private function data(string $filename): array
+    {
+        $thriller = file_get_contents(dirname(__DIR__) . '/asset/album/' . $filename);
+        assert($thriller !== false);
+
+        /** @psalm-var array<string, mixed> $data */
+        $data = json_decode(
+            $thriller,
+            true,
+            JSON_THROW_ON_ERROR,
+        );
+
+        return $data;
     }
 }
