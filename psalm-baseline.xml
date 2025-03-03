@@ -29,6 +29,23 @@
       <code><![CDATA[public function hydrate($value, ?array $data): Money]]></code>
     </MissingOverrideAttribute>
   </file>
+  <file src="src/Artist.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$artistName]]></code>
+      <code><![CDATA[$name]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/ArtistHydratorFactory.php">
+    <UnusedParam>
+      <code><![CDATA[$container]]></code>
+    </UnusedParam>
+  </file>
+  <file src="src/ArtistStrategy.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
+      <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="src/Track.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$length]]></code>

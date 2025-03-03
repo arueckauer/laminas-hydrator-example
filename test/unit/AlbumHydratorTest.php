@@ -8,6 +8,11 @@ use DateTimeImmutable;
 use LaminasHydratorExample\Album;
 use LaminasHydratorExample\AlbumHydratorFactory;
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
+use LaminasHydratorExample\Artist;
+use LaminasHydratorExample\ArtistHydratorFactory;
+use LaminasHydratorExample\ArtistHydratorInterface;
+use LaminasHydratorExample\ArtistStrategy;
+use LaminasHydratorExample\ArtistStrategyFactory;
 use LaminasHydratorExample\Genre;
 use LaminasHydratorExample\Money;
 use LaminasHydratorExample\Track;
@@ -41,7 +46,7 @@ final class AlbumHydratorTest extends TestCase
     public function test_hydrate_thriller(): void
     {
         $expected = new Album(
-            'Michael Jackson',
+            new Artist('Michael Jackson', null),
             'Thriller',
             Genre::Pop,
             new DateTimeImmutable('1982-11-29'),
@@ -69,7 +74,7 @@ final class AlbumHydratorTest extends TestCase
     public function test_hydrate_wirKinderVomBahnhofSoul(): void
     {
         $expected = new Album(
-            'Jan Delay',
+            new Artist('Jan Philipp Eißfeldt', 'Jan Delay'),
             'Wir Kinder vom Bahnhof Soul',
             Genre::Funk,
             new DateTimeImmutable('2009-08-14'),
@@ -95,7 +100,9 @@ final class AlbumHydratorTest extends TestCase
      */
     private function albumHydrator(): AutoInstantiatingReflectionHydrator
     {
-        $trackHydrator = (new TrackHydratorFactory())($this->createStub(ContainerInterface::class));
+        $containerStub = $this->createStub(ContainerInterface::class);
+
+        $trackHydrator = (new TrackHydratorFactory())($containerStub);
 
         $containerA = $this->createMock(ContainerInterface::class);
         $containerA
@@ -106,16 +113,27 @@ final class AlbumHydratorTest extends TestCase
 
         $trackCollectionStrategy = (new TrackCollectionStrategyFactory())($containerA);
 
-        $containerB = $this->createMock(ContainerInterface::class);
-        assert($containerB instanceof ContainerInterface);
+        $artistHydrator = (new ArtistHydratorFactory())($containerStub);
 
+        $containerB = $this->createMock(ContainerInterface::class);
         $containerB
             ->expects(self::once())
             ->method('get')
-            ->with(TrackCollectionStrategy::class)
-            ->willReturn($trackCollectionStrategy);
+            ->with(ArtistHydratorInterface::class)
+            ->willReturn($artistHydrator);
 
-        return (new AlbumHydratorFactory())($containerB);
+        $artistStrategy = (new ArtistStrategyFactory())($containerB);
+
+        $containerC = $this->createMock(ContainerInterface::class);
+        $containerC
+            ->expects(self::exactly(2))
+            ->method('get')
+            ->willReturnCallback(fn(string $serviceName) => match ($serviceName) {
+                    ArtistStrategy::class => $artistStrategy,
+                    TrackCollectionStrategy::class => $trackCollectionStrategy,
+            });
+
+        return (new AlbumHydratorFactory())($containerC);
     }
 
     /**

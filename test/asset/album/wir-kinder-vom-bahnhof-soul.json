@@ -1,5 +1,8 @@
 {
-  "artist": "Jan Delay",
+  "artist": {
+    "name": "Jan Philipp Eißfeldt",
+    "artistName": "Jan Delay"
+  },
   "name": "Wir Kinder vom Bahnhof Soul",
   "genre": "Funk",
   "releaseDate": "2009-08-14",

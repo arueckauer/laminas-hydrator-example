@@ -9,7 +9,7 @@ use DateTimeImmutable;
 final readonly class Album
 {
     public function __construct(
-        public string $artist,
+        public Artist $artist,
         public string $name,
         public Genre $genre,
         public DateTimeImmutable $releaseDate,

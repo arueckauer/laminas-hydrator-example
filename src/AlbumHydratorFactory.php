@@ -25,10 +25,17 @@ final class AlbumHydratorFactory
      */
     public function __invoke(ContainerInterface $container): AutoInstantiatingReflectionHydrator
     {
+        $artistStrategy = $container->get(ArtistStrategy::class);
+        assert($artistStrategy instanceof ArtistStrategy);
+
         $trackCollectionStrategy = $container->get(TrackCollectionStrategy::class);
         assert($trackCollectionStrategy instanceof TrackCollectionStrategy);
 
         $reflectionHydrator = new ReflectionHydrator();
+        $reflectionHydrator->addStrategy(
+            'artist',
+            $artistStrategy,
+        );
         $reflectionHydrator->addStrategy(
             'genre',
             new BackedEnumStrategy(Genre::class)

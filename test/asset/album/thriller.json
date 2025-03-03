@@ -1,5 +1,8 @@
 {
-  "artist": "Michael Jackson",
+  "artist": {
+    "name": "Michael Jackson",
+    "artistName": null
+  },
   "name": "Thriller",
   "genre": "Pop",
   "releaseDate": "1982-11-29",
