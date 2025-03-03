@@ -1,40 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
-  <file src="bin/hydration.php">
-    <RedundantConditionGivenDocblockType>
-      <code><![CDATA[assert($album instanceof Album)]]></code>
-    </RedundantConditionGivenDocblockType>
-  </file>
   <file src="src/Album.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
+      <code><![CDATA[$artist]]></code>
       <code><![CDATA[$genre]]></code>
+      <code><![CDATA[$name]]></code>
       <code><![CDATA[$recommendedRetailPrice]]></code>
       <code><![CDATA[$releaseDate]]></code>
       <code><![CDATA[$tracks]]></code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="src/AlbumHydratorFactory.php">
-    <UnusedParam>
-      <code><![CDATA[$container]]></code>
-    </UnusedParam>
+  <file src="src/Ampliamento/Laminas/Hydrator/Strategy/DateTimeImmutableMidnightFormatterStrategy.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
+      <code><![CDATA[public function hydrate($value, ?array $data = null)]]></code>
+    </MissingOverrideAttribute>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$hydrated]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[mixed|DateTimeInterface]]></code>
+    </UnnecessaryVarAnnotation>
   </file>
-  <file src="src/MoneyStrategy.php">
+  <file src="src/Ampliamento/Laminas/Hydrator/Strategy/MoneyStrategy.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function extract($value, ?object $object = null): string]]></code>
       <code><![CDATA[public function hydrate($value, ?array $data): Money]]></code>
     </MissingOverrideAttribute>
   </file>
   <file src="src/Track.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
       <code><![CDATA[$length]]></code>
       <code><![CDATA[$number]]></code>
       <code><![CDATA[$title]]></code>
     </PossiblyUnusedProperty>
+  </file>
+  <file src="src/TrackCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function count(): int]]></code>
+      <code><![CDATA[public function getIterator(): Traversable]]></code>
+      <code><![CDATA[public function offsetExists(mixed $offset): bool]]></code>
+      <code><![CDATA[public function offsetGet(mixed $offset): mixed]]></code>
+      <code><![CDATA[public function offsetSet(mixed $offset, mixed $value): void]]></code>
+      <code><![CDATA[public function offsetUnset(mixed $offset): void]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[count]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/TrackCollectionStrategy.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
+      <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/TrackHydratorFactory.php">
+    <UnusedParam>
+      <code><![CDATA[$container]]></code>
+    </UnusedParam>
   </file>
 </files>

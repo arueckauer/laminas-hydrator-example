@@ -26,7 +26,9 @@ final class ConfigProvider
     {
         return [
             'factories' => [
-                AlbumHydratorInterface::class => AlbumHydratorFactory::class,
+                AlbumHydratorInterface::class  => AlbumHydratorFactory::class,
+                TrackCollectionStrategy::class => TrackCollectionStrategyFactory::class,
+                TrackHydratorInterface::class  => TrackHydratorFactory::class,
             ],
         ];
     }

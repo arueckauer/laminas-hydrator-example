@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LaminasHydratorExample;
+namespace LaminasHydratorExample\Ampliamento\Laminas\Hydrator\Strategy;
 
 use InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use LaminasHydratorExample\Money;
 
 use function count;
 use function number_format;

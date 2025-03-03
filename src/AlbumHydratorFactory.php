@@ -6,15 +6,27 @@ namespace LaminasHydratorExample;
 
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
-use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
-use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
+use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
+use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\Strategy\DateTimeImmutableMidnightFormatterStrategy;
+use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\Strategy\MoneyStrategy;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
+
+use function assert;
 
 final class AlbumHydratorFactory
 {
-    public function __invoke(ContainerInterface $container): ReflectionHydrator
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function __invoke(ContainerInterface $container): AutoInstantiatingReflectionHydrator
     {
+        $trackCollectionStrategy = $container->get(TrackCollectionStrategy::class);
+        assert($trackCollectionStrategy instanceof TrackCollectionStrategy);
+
         $reflectionHydrator = new ReflectionHydrator();
         $reflectionHydrator->addStrategy(
             'genre',
@@ -22,7 +34,7 @@ final class AlbumHydratorFactory
         );
         $reflectionHydrator->addStrategy(
             'releaseDate',
-            new DateTimeImmutableFormatterStrategy(new DateTimeFormatterStrategy('Y-m-d'))
+            new DateTimeImmutableMidnightFormatterStrategy(new DateTimeFormatterStrategy('Y-m-d'))
         );
         $reflectionHydrator->addStrategy(
             'recommendedRetailPrice',
@@ -30,9 +42,12 @@ final class AlbumHydratorFactory
         );
         $reflectionHydrator->addStrategy(
             'tracks',
-            new CollectionStrategy(new ReflectionHydrator(), Track::class),
+            $trackCollectionStrategy,
         );
 
-        return $reflectionHydrator;
+        return new AutoInstantiatingReflectionHydrator(
+            $reflectionHydrator,
+            Album::class,
+        );
     }
 }
