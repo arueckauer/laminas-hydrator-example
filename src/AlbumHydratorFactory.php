@@ -11,7 +11,7 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use Psr\Container\ContainerInterface;
 
-class AlbumHydratorFactory
+final class AlbumHydratorFactory
 {
     public function __invoke(ContainerInterface $container): ReflectionHydrator
     {

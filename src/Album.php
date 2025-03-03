@@ -6,7 +6,7 @@ namespace LaminasHydratorExample;
 
 use DateTimeImmutable;
 
-readonly class Album
+final readonly class Album
 {
     /**
      * @param array<array-key, Track> $tracks

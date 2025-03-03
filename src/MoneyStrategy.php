@@ -12,7 +12,7 @@ use function number_format;
 use function preg_match;
 use function sprintf;
 
-readonly class MoneyStrategy implements StrategyInterface
+final readonly class MoneyStrategy implements StrategyInterface
 {
     /**
      * @inheritDoc

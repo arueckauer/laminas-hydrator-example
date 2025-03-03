@@ -16,14 +16,26 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
     $output = new ConsoleOutput();
 
-    $dataPath   = dirname(__DIR__) . '/test/asset/album/';
+    $dataPath  = dirname(__DIR__) . '/test/asset/album/';
+    $filenames = scandir($dataPath);
+
+    if ($filenames === false) {
+        $output->writeln('<error>Unable to read data path</error>');
+        return;
+    }
+
     $albumFiles = array_filter(
-        scandir($dataPath),
+        $filenames,
         static fn (string $file): bool => pathinfo($file, PATHINFO_EXTENSION) === 'json'
     );
 
     foreach ($albumFiles as $albumFile) {
         $inputJson = file_get_contents($dataPath . $albumFile);
+
+        if ($inputJson === false) {
+            $output->writeln(sprintf('<error>Unable to read file: %s</error>', $albumFile));
+            continue;
+        }
 
         /** @var array<string, mixed> $inputArray */
         $inputArray = json_decode(

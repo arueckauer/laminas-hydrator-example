@@ -7,7 +7,7 @@ namespace LaminasHydratorExample;
 /**
  * @psalm-type _Dependencies = array<string, array<string, string|array>>
  */
-class ConfigProvider
+final class ConfigProvider
 {
     /**
      * @psalm-return array<_Dependencies>

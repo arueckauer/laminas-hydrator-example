@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
   <file src="bin/hydration.php">
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[assert($album instanceof Album)]]></code>
@@ -17,9 +17,15 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/AlbumHydratorFactory.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$container]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
+  </file>
+  <file src="src/MoneyStrategy.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function extract($value, ?object $object = null): string]]></code>
+      <code><![CDATA[public function hydrate($value, ?array $data): Money]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="src/Track.php">
     <PossiblyUnusedMethod>

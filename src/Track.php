@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasHydratorExample;
 
-readonly class Track
+final readonly class Track
 {
     public function __construct(
         public int $number,
