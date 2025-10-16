@@ -33,7 +33,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasHydratorExampleTest\\": "test/unit/"
+            "LaminasHydratorExampleTest\\": "test/unit/",
+            "TestDouble\\": "test/double/"
         }
     },
     "config": {

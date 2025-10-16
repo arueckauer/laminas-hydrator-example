@@ -9,5 +9,6 @@ This repository provides examples for the laminas-hydrator component.
 - DateTimeImmutableStrategy: see [Album#releaseDate](src/Album/Dto.php) and [DtoHydratorFactory:46](src/Album/DtoHydratorFactory.php#L46)
 - Custom strategy: see [Album#money](src/Album/Dto.php), [DtoHydratorFactory:50](src/Album/DtoHydratorFactory.php#L50) and [MoneyStrategy](src/Ampliamento/Laminas/Hydrator/Strategy/MoneyStrategy.php)
 - Collection: see [Album#tracks](src/Album/Dto.php), [DtoHydratorFactory:54](src/Album/DtoHydratorFactory.php#L54) and [Track\DtoCollectionStrategy](src/Track/DtoCollectionStrategy.php)
+- Nested object from flat array: see [User\Dto](src/User/Dto.php) with [User\DtoHydratorFactory](src/User/DtoHydratorFactory.php) and [User\DtoStrategy](src/User/DtoStrategy.php)
 
 For more information see the [official documentation](https://docs.laminas.dev/laminas-hydrator/).

@@ -26,11 +26,15 @@ final class ConfigProvider
     {
         return [
             'factories' => [
-                Album\DtoHydratorInterface::class  => Album\DtoHydratorFactory::class,
-                Artist\DtoHydratorInterface::class => Artist\DtoHydratorFactory::class,
-                Artist\DtoStrategy::class          => Artist\DtoStrategyFactory::class,
-                Track\DtoCollectionStrategy::class => Track\DtoCollectionStrategyFactory::class,
-                Track\DtoHydratorInterface::class  => Track\DtoHydratorFactory::class,
+                Address\DtoHydratorInterface::class => Address\DtoHydratorFactory::class,
+                Address\DtoStrategy::class          => Address\DtoStrategyFactory::class,
+                Album\DtoHydratorInterface::class   => Album\DtoHydratorFactory::class,
+                Artist\DtoHydratorInterface::class  => Artist\DtoHydratorFactory::class,
+                Artist\DtoStrategy::class           => Artist\DtoStrategyFactory::class,
+                Track\DtoCollectionStrategy::class  => Track\DtoCollectionStrategyFactory::class,
+                Track\DtoHydratorInterface::class   => Track\DtoHydratorFactory::class,
+                User\DtoHydratorInterface::class    => User\DtoHydratorFactory::class,
+                User\DtoStrategy::class             => User\DtoStrategyFactory::class,
             ],
         ];
     }
