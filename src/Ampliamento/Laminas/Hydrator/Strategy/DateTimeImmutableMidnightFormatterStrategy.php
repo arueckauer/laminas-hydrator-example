@@ -52,6 +52,7 @@ final readonly class DateTimeImmutableMidnightFormatterStrategy implements Strat
             return $value;
         }
 
+        /** @psalm-var mixed|DateTimeInterface $hydrated */
         $hydrated = $this->dateTimeStrategy->hydrate($value, $data);
 
         if ($hydrated instanceof DateTime) {
