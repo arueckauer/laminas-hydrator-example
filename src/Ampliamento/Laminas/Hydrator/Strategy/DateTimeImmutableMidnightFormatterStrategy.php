@@ -10,6 +10,7 @@ use DateTimeInterface;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use Override;
 
 final readonly class DateTimeImmutableMidnightFormatterStrategy implements StrategyInterface
 {
@@ -28,6 +29,7 @@ final readonly class DateTimeImmutableMidnightFormatterStrategy implements Strat
      *     will be returned unmodified; otherwise, it will be extracted to a
      *     string.
      */
+    #[Override]
     public function extract($value, ?object $object = null)
     {
         return $this->dateTimeStrategy->extract($value, $object);
@@ -43,13 +45,13 @@ final readonly class DateTimeImmutableMidnightFormatterStrategy implements Strat
      * @throws InvalidArgumentException If $value is not null, not a
      *     string, nor a DateTimeInterface.
      */
+    #[Override]
     public function hydrate($value, ?array $data = null)
     {
         if ($value instanceof DateTimeImmutable) {
             return $value;
         }
 
-        /** @psalm-var mixed|DateTimeInterface $hydrated */
         $hydrated = $this->dateTimeStrategy->hydrate($value, $data);
 
         if ($hydrated instanceof DateTime) {

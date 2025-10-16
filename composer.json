@@ -11,20 +11,20 @@
     ],
     "require": {
         "php": "~8.2.0",
-        "guzzlehttp/guzzle": "^7.9.2",
-        "laminas/laminas-config-aggregator": "^1.18",
+        "guzzlehttp/guzzle": "^7.10.0",
+        "laminas/laminas-config-aggregator": "^1.19",
         "laminas/laminas-hydrator": "^4.16",
-        "laminas/laminas-servicemanager": "^4.4",
+        "laminas/laminas-servicemanager": "^4.5",
         "psr/http-client": "^1.0.3"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "~2.45.0",
-        "laminas/laminas-coding-standard": "~3.0.1",
-        "phpcsstandards/phpcsextra": "~1.2.1",
-        "phpunit/phpunit": "~11.5.10",
-        "psalm/plugin-phpunit": "~0.19.2",
-        "rector/rector": "~2.0.9",
-        "vimeo/psalm": "~6.8.8"
+        "ergebnis/composer-normalize": "~2.48.2",
+        "laminas/laminas-coding-standard": "~3.1.0",
+        "phpcsstandards/phpcsextra": "~1.4.1",
+        "phpunit/phpunit": "~11.5.42",
+        "psalm/plugin-phpunit": "~0.19.5",
+        "rector/rector": "~2.2.3",
+        "vimeo/psalm": "~6.13.1"
     },
     "autoload": {
         "psr-4": {

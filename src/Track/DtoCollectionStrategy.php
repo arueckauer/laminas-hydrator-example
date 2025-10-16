@@ -7,6 +7,7 @@ namespace LaminasHydratorExample\Track;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasHydratorExample\Ampliamento\Laminas\Hydrator\AutoInstantiatingReflectionHydrator;
 use LaminasHydratorExample\Exception\InvalidArgument;
+use Override;
 use ReflectionException;
 
 use function array_map;
@@ -25,6 +26,7 @@ final readonly class DtoCollectionStrategy implements StrategyInterface
      * @inheritDoc
      * @throws InvalidArgument
      */
+    #[Override]
     public function extract($value, ?object $object = null)
     {
         if (! is_array($value)) {
@@ -42,6 +44,7 @@ final readonly class DtoCollectionStrategy implements StrategyInterface
      * @throws InvalidArgument
      * @throws ReflectionException
      */
+    #[Override]
     public function hydrate($value, ?array $data)
     {
         if (! is_array($value)) {
