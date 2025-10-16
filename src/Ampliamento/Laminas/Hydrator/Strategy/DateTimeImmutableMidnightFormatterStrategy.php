@@ -28,6 +28,7 @@ final readonly class DateTimeImmutableMidnightFormatterStrategy implements Strat
      *     will be returned unmodified; otherwise, it will be extracted to a
      *     string.
      */
+    #[\Override]
     public function extract($value, ?object $object = null)
     {
         return $this->dateTimeStrategy->extract($value, $object);
@@ -43,6 +44,7 @@ final readonly class DateTimeImmutableMidnightFormatterStrategy implements Strat
      * @throws InvalidArgumentException If $value is not null, not a
      *     string, nor a DateTimeInterface.
      */
+    #[\Override]
     public function hydrate($value, ?array $data = null)
     {
         if ($value instanceof DateTimeImmutable) {

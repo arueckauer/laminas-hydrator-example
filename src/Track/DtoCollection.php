@@ -28,29 +28,35 @@ final readonly class DtoCollection implements ArrayAccess, Countable, IteratorAg
         $this->tracks = $data;
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->tracks);
     }
 
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->tracks[$offset]);
     }
 
+    #[\Override]
     public function offsetGet(mixed $offset): mixed
     {
         return $this->tracks[$offset];
     }
 
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
     }
 
+    #[\Override]
     public function offsetUnset(mixed $offset): void
     {
     }
 
+    #[\Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->tracks);

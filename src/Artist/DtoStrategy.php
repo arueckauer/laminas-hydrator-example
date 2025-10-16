@@ -21,6 +21,7 @@ final readonly class DtoStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function extract($value, ?object $object = null)
     {
         if (! $value instanceof Dto) {
@@ -34,6 +35,7 @@ final readonly class DtoStrategy implements StrategyInterface
      * @inheritDoc
      * @throws ReflectionException
      */
+    #[\Override]
     public function hydrate($value, ?array $data)
     {
         if (! is_array($value)) {

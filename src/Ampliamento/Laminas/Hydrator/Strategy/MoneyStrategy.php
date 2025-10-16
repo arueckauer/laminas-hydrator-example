@@ -18,6 +18,7 @@ final readonly class MoneyStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function extract($value, ?object $object = null): string
     {
         if (! $value instanceof Money) {
@@ -34,6 +35,7 @@ final readonly class MoneyStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function hydrate($value, ?array $data): Money
     {
         if ($value instanceof Money) {
