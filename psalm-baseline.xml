@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.8.8@1361cd33008feb3ae2b4a93f1860e14e538ec8c2">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/Album/Dto.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$artist]]></code>
@@ -12,22 +12,12 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Ampliamento/Laminas/Hydrator/Strategy/DateTimeImmutableMidnightFormatterStrategy.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
-      <code><![CDATA[public function hydrate($value, ?array $data = null)]]></code>
-    </MissingOverrideAttribute>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$hydrated]]></code>
     </RiskyTruthyFalsyComparison>
     <UnnecessaryVarAnnotation>
       <code><![CDATA[mixed|DateTimeInterface]]></code>
     </UnnecessaryVarAnnotation>
-  </file>
-  <file src="src/Ampliamento/Laminas/Hydrator/Strategy/MoneyStrategy.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function extract($value, ?object $object = null): string]]></code>
-      <code><![CDATA[public function hydrate($value, ?array $data): Money]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="src/Artist/Dto.php">
     <PossiblyUnusedProperty>
@@ -40,12 +30,6 @@
       <code><![CDATA[$container]]></code>
     </UnusedParam>
   </file>
-  <file src="src/Artist/DtoStrategy.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
-      <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/Track/Dto.php">
     <PossiblyUnusedProperty>
       <code><![CDATA[$length]]></code>
@@ -54,23 +38,9 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Track/DtoCollection.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function count(): int]]></code>
-      <code><![CDATA[public function getIterator(): Traversable]]></code>
-      <code><![CDATA[public function offsetExists(mixed $offset): bool]]></code>
-      <code><![CDATA[public function offsetGet(mixed $offset): mixed]]></code>
-      <code><![CDATA[public function offsetSet(mixed $offset, mixed $value): void]]></code>
-      <code><![CDATA[public function offsetUnset(mixed $offset): void]]></code>
-    </MissingOverrideAttribute>
     <PossiblyUnusedMethod>
       <code><![CDATA[count]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Track/DtoCollectionStrategy.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function extract($value, ?object $object = null)]]></code>
-      <code><![CDATA[public function hydrate($value, ?array $data)]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="src/Track/DtoHydratorFactory.php">
     <UnusedParam>
