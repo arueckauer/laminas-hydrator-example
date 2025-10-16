@@ -8,6 +8,7 @@ use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use Override;
 use Traversable;
 
 use function count;
@@ -28,35 +29,35 @@ final readonly class DtoCollection implements ArrayAccess, Countable, IteratorAg
         $this->tracks = $data;
     }
 
-    #[\Override]
+    #[Override]
     public function count(): int
     {
         return count($this->tracks);
     }
 
-    #[\Override]
+    #[Override]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->tracks[$offset]);
     }
 
-    #[\Override]
+    #[Override]
     public function offsetGet(mixed $offset): mixed
     {
         return $this->tracks[$offset];
     }
 
-    #[\Override]
+    #[Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
     }
 
-    #[\Override]
+    #[Override]
     public function offsetUnset(mixed $offset): void
     {
     }
 
-    #[\Override]
+    #[Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->tracks);
