@@ -17,7 +17,7 @@ use function dirname;
 use function is_file;
 use function is_readable;
 
-final class HydratorTest extends TestCase
+final class DtoStrategyTest extends TestCase
 {
     /**
      * @throws ContainerExceptionInterface
